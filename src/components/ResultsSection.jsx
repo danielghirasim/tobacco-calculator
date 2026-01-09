@@ -1,16 +1,10 @@
 function BigSavingsCard({ daily, monthly, yearly, percent, isSaving, t }) {
   return (
-    <div
-      className={`rounded-2xl p-6 text-white ${
-        isSaving
-          ? 'bg-gradient-to-br from-emerald-500 to-teal-600'
-          : 'bg-gradient-to-br from-red-500 to-rose-600'
-      }`}
-    >
+    <div className={`rounded-2xl p-6 text-white ${isSaving ? 'bg-gradient-to-br from-emerald-500 to-teal-600' : 'bg-gradient-to-br from-red-500 to-rose-600'}`}>
       <div className={`text-sm font-medium uppercase tracking-wide mb-4 text-center ${isSaving ? 'text-emerald-100' : 'text-red-100'}`}>
         {isSaving ? t('youSave') : t('youLose')}
       </div>
-      
+
       <div className="grid grid-cols-3 gap-3 text-center">
         <div>
           <div className="text-xs uppercase tracking-wide opacity-80 mb-1">{t('daily')}</div>
@@ -70,15 +64,13 @@ function DetailCard({ title, rolledLabel, rolledValue, boughtLabel, boughtValue,
           <span className={`font-medium ${isSaving ? 'text-emerald-700' : 'text-red-700'}`}>{t('savings')}</span>
           <div className="flex items-center gap-2">
             <span className={`font-bold ${isSaving ? 'text-emerald-600' : 'text-red-600'}`}>
-              {isSaving ? '+' : '-'}{savingsValue}
+              {isSaving ? '+' : '-'}
+              {savingsValue}
             </span>
             {percent !== 0 && (
-              <span
-                className={`text-xs font-bold px-2 py-0.5 rounded-full ${
-                  isSaving ? 'text-emerald-600 bg-emerald-100' : 'text-red-600 bg-red-100'
-                }`}
-              >
-                {isSaving ? '-' : '+'}{Math.abs(percent).toFixed(0)}%
+              <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${isSaving ? 'text-emerald-600 bg-emerald-100' : 'text-red-600 bg-red-100'}`}>
+                {isSaving ? '-' : '+'}
+                {Math.abs(percent).toFixed(0)}%
               </span>
             )}
           </div>
@@ -100,9 +92,7 @@ export function ResultsSection({ results, t, formatCurrency }) {
   }
 
   const isSaving = results.yearlySavings > 0;
-  const canMakeText = t('canMake')
-    .replace('{count}', results.cigarettesFromTobacco)
-    .replace('{size}', results.tobaccoPackSize);
+  const canMakeText = t('canMake').replace('{count}', results.cigarettesFromTobacco).replace('{size}', results.tobaccoPackSize);
 
   return (
     <div className="bg-white rounded-2xl p-5 md:p-6 shadow-sm">
@@ -116,22 +106,13 @@ export function ResultsSection({ results, t, formatCurrency }) {
         t={t}
       />
 
+      {/* Assumption note */}
+      <p className="text-center text-xs text-slate-400 mt-3">📦 {t('basedOnOnePackDay')}</p>
+
       {/* Cost comparison */}
       <div className="mt-6 mb-6">
-        <ComparisonRow
-          icon="📅"
-          label={t('daily')}
-          rolledValue={formatCurrency(results.rolledPackCost)}
-          boughtValue={formatCurrency(results.boughtPackCost)}
-          t={t}
-        />
-        <ComparisonRow
-          icon="📆"
-          label={t('monthly')}
-          rolledValue={formatCurrency(results.rolledPackCost * 30)}
-          boughtValue={formatCurrency(results.boughtPackCost * 30)}
-          t={t}
-        />
+        <ComparisonRow icon="📅" label={t('daily')} rolledValue={formatCurrency(results.rolledPackCost)} boughtValue={formatCurrency(results.boughtPackCost)} t={t} />
+        <ComparisonRow icon="📆" label={t('monthly')} rolledValue={formatCurrency(results.rolledPackCost * 30)} boughtValue={formatCurrency(results.boughtPackCost * 30)} t={t} />
       </div>
 
       {/* Detailed comparisons */}
