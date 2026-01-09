@@ -198,5 +198,5 @@ export const defaultFormData = {
 };
 
 export const packSizeOptions = [10, 20, 25];
-export const tobaccoSizeOptions = [30, 50, 100, 140];
-export const tubesCountOptions = [100, 200, 250, 500];
+export const tobaccoSizeOptions = [30, 45, 50, 90, 95, 100, 140, 150];
+export const tubesCountOptions = [100, 120, 200, 250, 500, 1000];
