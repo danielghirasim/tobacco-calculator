@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tobacco-calculator.netlify.app/sitemap.xml
