@@ -44,7 +44,6 @@ export function ReferenceSection({ t }) {
               </div>
             ))}
           </div>
-          <p className="mt-3 pt-3 border-t border-amber-200 text-xs text-amber-600">💡 {t('savingTip')}</p>
         </div>
       </div>
     </div>

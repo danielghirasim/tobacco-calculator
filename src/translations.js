@@ -47,6 +47,8 @@ export const translations = {
     youLose: 'You Lose',
     moreExpensive: 'more expensive',
     basedOnOnePackDay: 'Based on 1 pack per day',
+    cigsPerDay: 'Cigarettes per Day',
+    basedOnXCigsDay: 'Based on {count} cigarettes/day',
     vs: 'vs',
     tobaccoInfo: 'Tobacco Info',
     canMake: '{count} cigarettes from {size}g',
@@ -104,6 +106,8 @@ export const translations = {
     youLose: 'Du Verlierst',
     moreExpensive: 'teurer',
     basedOnOnePackDay: 'Basierend auf 1 Packung pro Tag',
+    cigsPerDay: 'Zigaretten pro Tag',
+    basedOnXCigsDay: 'Basierend auf {count} Zigaretten/Tag',
     vs: 'vs',
     tobaccoInfo: 'Tabak Info',
     canMake: '{count} Zigaretten aus {size}g',
@@ -161,6 +165,8 @@ export const translations = {
     youLose: 'Pierzi',
     moreExpensive: 'mai scump',
     basedOnOnePackDay: 'Calculat pentru 1 pachet pe zi',
+    cigsPerDay: 'Țigări pe Zi',
+    basedOnXCigsDay: 'Calculat la {count} țigări/zi',
     vs: 'vs',
     tobaccoInfo: 'Info Tutun',
     canMake: '{count} țigări din {size}g',
@@ -192,6 +198,7 @@ export const flags = {
 export const defaultFormData = {
   packPrice: 8,
   packSize: 20,
+  cigsPerDay: 20,
   tobaccoPackPrice: 15,
   tobaccoPackSize: 50,
   tobaccoPerCig: 0.8,
@@ -202,4 +209,4 @@ export const defaultFormData = {
 
 export const packSizeOptions = [10, 20, 25];
 export const tobaccoSizeOptions = [30, 45, 50, 90, 95, 100, 140, 150];
-export const tubesCountOptions = [100, 120, 200, 250, 500, 1000];
+export const tubesCountOptions = [100, 200, 250, 500, 1000];

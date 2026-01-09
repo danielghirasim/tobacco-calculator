@@ -47,6 +47,10 @@ function App() {
 
   const formatCurrency = useCallback(
     (value) => {
+      // Protect against NaN and Infinity
+      if (!isFinite(value) || isNaN(value)) {
+        return '-';
+      }
       const curr = currencies[currency];
       const formatted = value.toFixed(2);
       if (currency === 'RON') {
@@ -59,9 +63,10 @@ function App() {
 
   const calculate = useCallback(
     (shouldScroll = true) => {
-      const { packPrice, packSize, tobaccoPackPrice, tobaccoPackSize, tobaccoPerCig, tubesPackPrice, tubesCount, otherCosts } = formData;
+      const { packPrice, packSize, cigsPerDay, tobaccoPackPrice, tobaccoPackSize, tobaccoPerCig, tubesPackPrice, tubesCount, otherCosts } = formData;
 
-      if (!packPrice || !tobaccoPackPrice || !tobaccoPackSize || !tubesPackPrice || !tubesCount) {
+      // Validate all required fields - prevent division by zero
+      if (!packPrice || !packSize || !cigsPerDay || !tobaccoPackPrice || !tobaccoPackSize || !tobaccoPerCig || !tubesPackPrice || !tubesCount) {
         setResults(null);
         return;
       }
@@ -80,12 +85,15 @@ function App() {
       const savingsPerCig = boughtCigCost - rolledCigCost;
       const savingsPerPack = boughtPackCost - rolledPackCost;
 
-      const packsPerMonth = 30;
-      const monthlyRolledCost = rolledPackCost * packsPerMonth + (parseFloat(otherCosts) || 0);
-      const monthlyBoughtCost = boughtPackCost * packsPerMonth;
+      // Calculate based on cigarettes per day
+      const dailyRolledCost = rolledCigCost * cigsPerDay;
+      const dailyBoughtCost = boughtCigCost * cigsPerDay;
+      const dailySavings = dailyBoughtCost - dailyRolledCost;
+
+      const monthlyRolledCost = dailyRolledCost * 30 + (parseFloat(otherCosts) || 0);
+      const monthlyBoughtCost = dailyBoughtCost * 30;
       const monthlySavings = monthlyBoughtCost - monthlyRolledCost;
 
-      const dailySavings = savingsPerPack;
       const yearlySavings = monthlySavings * 12;
 
       const savingsPercentPerCig = boughtCigCost > 0 ? (savingsPerCig / boughtCigCost) * 100 : 0;
@@ -102,13 +110,18 @@ function App() {
         savingsPerPack,
         savingsPercentPerPack,
         dailySavings,
+        dailyRolledCost,
+        dailyBoughtCost,
         monthlySavings,
+        monthlyRolledCost,
+        monthlyBoughtCost,
         savingsPercentMonthly,
         yearlySavings,
         cigarettesFromTobacco,
         tobaccoPackSize,
         tobaccoPricePerGram,
         packSize,
+        cigsPerDay,
       });
       setHasCalculated(true);
 

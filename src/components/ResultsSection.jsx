@@ -1,8 +1,12 @@
-function BigSavingsCard({ daily, monthly, yearly, percent, isSaving, t }) {
+function BigSavingsCard({ daily, monthly, yearly, percent, isSaving, cigsPerDay, t }) {
   return (
     <div className={`rounded-2xl p-6 text-white ${isSaving ? 'bg-gradient-to-br from-emerald-500 to-teal-600' : 'bg-gradient-to-br from-red-500 to-rose-600'}`}>
-      <div className={`text-sm font-medium uppercase tracking-wide mb-4 text-center ${isSaving ? 'text-emerald-100' : 'text-red-100'}`}>
-        {isSaving ? t('youSave') : t('youLose')}
+      <div className="text-center mb-5">
+        <div className={`text-xl md:text-2xl font-bold uppercase tracking-wide ${isSaving ? 'text-white' : 'text-white'}`}>{isSaving ? t('youSave') : t('youLose')}</div>
+        <div className="inline-flex items-center gap-1.5 mt-2 px-3 py-1 rounded-full bg-white/15 text-sm font-medium">
+          <span>🚬</span>
+          <span>{t('basedOnXCigsDay').replace('{count}', cigsPerDay)}</span>
+        </div>
       </div>
 
       <div className="grid grid-cols-3 gap-3 text-center">
@@ -20,7 +24,7 @@ function BigSavingsCard({ daily, monthly, yearly, percent, isSaving, t }) {
         </div>
       </div>
 
-      {percent !== 0 && (
+      {percent !== 0 && !isNaN(percent) && (
         <div className="text-center mt-4">
           <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-bold bg-white/20">
             {isSaving ? '✓' : '✗'} {Math.abs(percent).toFixed(0)}% {isSaving ? t('cheaper') : t('moreExpensive')}
@@ -103,16 +107,14 @@ export function ResultsSection({ results, t, formatCurrency }) {
         yearly={formatCurrency(Math.abs(results.yearlySavings))}
         percent={results.savingsPercentMonthly}
         isSaving={isSaving}
+        cigsPerDay={results.cigsPerDay}
         t={t}
       />
 
-      {/* Assumption note */}
-      <p className="text-center text-xs text-slate-400 mt-3">📦 {t('basedOnOnePackDay')}</p>
-
       {/* Cost comparison */}
       <div className="mt-6 mb-6">
-        <ComparisonRow icon="📅" label={t('daily')} rolledValue={formatCurrency(results.rolledPackCost)} boughtValue={formatCurrency(results.boughtPackCost)} t={t} />
-        <ComparisonRow icon="📆" label={t('monthly')} rolledValue={formatCurrency(results.rolledPackCost * 30)} boughtValue={formatCurrency(results.boughtPackCost * 30)} t={t} />
+        <ComparisonRow icon="📅" label={t('daily')} rolledValue={formatCurrency(results.dailyRolledCost)} boughtValue={formatCurrency(results.dailyBoughtCost)} t={t} />
+        <ComparisonRow icon="📆" label={t('monthly')} rolledValue={formatCurrency(results.monthlyRolledCost)} boughtValue={formatCurrency(results.monthlyBoughtCost)} t={t} />
       </div>
 
       {/* Detailed comparisons */}
