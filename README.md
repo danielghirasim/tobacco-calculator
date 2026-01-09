@@ -16,7 +16,7 @@ A simple, intuitive web calculator to compare the cost of rolled cigarettes vers
 
 ## Live Demo
 
-[View Live Demo](https://your-domain.netlify.app) _(Update after deployment)_
+[View Live Demo](https://tobbaco-calculator.netlify.app/)
 
 ## Getting Started
 
