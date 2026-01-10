@@ -2,7 +2,7 @@
 
 A simple, intuitive web calculator to compare the cost of rolled cigarettes versus store-bought packs. See exactly how much you can save daily, monthly, and yearly.
 
-![Tobacco Calculator Screenshot](https://via.placeholder.com/800x450?text=Tobacco+Calculator+Preview)
+![Tobacco Calculator Screenshot](https://github.com/danielghirasim/tobacco-calculator/blob/main/tobaccocalc.png)
 
 ## Features
 
@@ -137,4 +137,4 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ---
 
-**Disclaimer**: This calculator is for informational purposes only. Smoking is harmful to your health. If you smoke, consider quitting. Visit [smokefree.gov](https://smokefree.gov/) for resources.
+**Disclaimer**: This calculator is for informational purposes only. Smoking is harmful to your health.
